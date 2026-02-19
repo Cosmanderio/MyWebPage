@@ -1,0 +1,94 @@
+:root {
+    --dark-blue: #0B2D72;
+    --blue: #0992C2;
+    --light-blue: #0AC4E0;
+    --background-color: #f3e8c8;
+}
+
+body {
+    background-color: var(--background-color);
+    font-family: Inter, "Josefin Sans", Roboto, "Open Sans";
+    margin: 0;
+}
+
+header {
+    background-color: var(--dark-blue);
+    height: 50px;
+    color: var(--background-color);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: 0;
+    position: absolute;
+    width: 100%;
+    top: 0;
+    list-style: none;
+}
+
+header ul {
+    margin: 0;
+    height: 100%;
+}
+
+header li {
+    display: inline-block;
+    margin: 0 50px;
+    padding: 0 10px;
+    transition: background-color 0.2s ease;
+    background-color: inherit;
+    height: 100%;
+    cursor: pointer;
+}
+
+header li:hover {
+    background-color: #0d3586;
+}
+
+header a {
+    margin: auto 0;
+    text-decoration: none;
+    color: inherit;
+}
+
+#content {
+    align-content: center;
+    text-align: center;
+}
+
+#content > p {
+    padding-left: 20px;
+}
+
+h1 {
+    text-align: center;
+    font-family: 'Times New Roman', Times, serif;
+    margin-top: 80px;
+    margin-bottom: 40px;
+}
+
+h2 {
+    font-family: 'Times New Roman', Times, serif;
+    margin-bottom: 20px;
+}
+
+#screen {
+    margin-top: 80px;
+    border: var(--dark-blue) 2px solid;
+    border-radius: 10px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 30px;
+    width: 60%;
+    background-color: white;
+}
+
+#screen-div {
+    display: flex;
+    flex-direction: column;
+}
+
+#param {
+    margin-left: auto;
+    margin-right: auto;
+}
