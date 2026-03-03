@@ -1,14 +1,31 @@
 :root {
-    --dark-blue: #0B2D72;
+    --dark-blue: #161C34;
     --blue: #0992C2;
     --light-blue: #0AC4E0;
-    --background-color: #f3e8c8;
+    --background-color: #202A4D;
 }
 
 body {
     background-color: var(--background-color);
     font-family: Inter, "Josefin Sans", Roboto, "Open Sans";
     margin: 0;
+}
+
+h1, h2 {
+    color: #E9EAED;
+}
+
+h1 {
+    font-size: 42px;
+}
+
+h2 {
+    font-size: 32px;
+}
+
+p {
+    color: #C7C9D2;
+    font-size: 22px;
 }
 
 header {
@@ -42,13 +59,15 @@ header li {
 }
 
 header li:hover {
-    background-color: #0d3586;
+    background-color: #21284b;
 }
 
 header a {
     margin: auto 0;
     text-decoration: none;
     color: inherit;
+    position: relative;
+    top: -10px;
 }
 
 #content {
