@@ -6,3 +6,9 @@ screen.addEventListener("click", event => {
     let y = Math.round(event.offsetY / screen.clientHeight * screen.height);
     ctx.fillRect(x, y, 1, 1);
 });
+
+document.addEventListener("keydown", event => {
+    if (event.ctrlKey && event.key === "x") {
+        ctx.clearRect(0, 0, screen.width, screen.height);
+    }
+});
