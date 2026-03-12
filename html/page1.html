@@ -16,7 +16,12 @@
     <div id="screen-div">
         <canvas id="screen" width="512" height="256">Si vous voyez ceci merci de recharger la page</canvas>
         <div id="param">
-            <input type="number" value="5">
+            <input type="number" value="5" id="speed">
+            <div id="zoom">
+                <input type="button" value="-" id="zoom_minus">
+                <p id="zoom_p"></p>
+                <input type="button" value="+" id="zoom_plus">
+            </div>
         </div>
     </div>
     <script src="../javascript/gol.js"></script>
