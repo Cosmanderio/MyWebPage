@@ -23,7 +23,7 @@ h2 {
     font-size: 32px;
 }
 
-p {
+p, label {
     color: #C7C9D2;
     font-size: 22px;
 }
@@ -113,6 +113,27 @@ h2 {
 }
 
 #param * {
-    display: inline;
+    display: inline-block;
     margin: 4px 10px;
+}
+
+#zoom_p {
+    width: 50px;
+    text-align: center;
+}
+
+#speed {
+    margin: auto 10px;
+}
+
+#zoom_plus, #zoom_minus {
+    margin: 4px 0;
+    font-size: 16px;
+    width: 25px;
+    height: 25px;
+}
+
+#speed_label {
+    width: 100px;
+    text-align: center;
 }

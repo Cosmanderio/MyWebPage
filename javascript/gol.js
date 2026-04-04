@@ -10,6 +10,10 @@ const NEIGHBORS = [-WIDTH-1, -WIDTH, -WIDTH+1, -1, 1, WIDTH-1, WIDTH, WIDTH+1];
 let scroll_x = 0;
 let scroll_y = 0;
 let simulating = false;
+let simulation_speed = 5;
+const speed_range = document.querySelector("#speed");
+const speed_label = document.querySelector("#speed_label");
+speed_label.textContent = speed_range.value + " ticks/s";
 const keys = new Map();
 
 positiveModulo = (number, divisor) => ((number % divisor) + divisor) % divisor;
@@ -20,7 +24,7 @@ Int2Y = value => Math.floor(value / WIDTH);
 function setZoom(value) {
     const cx = (scroll_x + screen.width/2) / 2**zoom;
     const cy = (scroll_y + screen.height/2) / 2**zoom;
-    zoom = Math.max(value, 0);
+    zoom = Math.min(Math.max(value, 0), 8);
     scroll_x = Math.round(cx * 2**zoom - screen.width/2);
     scroll_y = Math.round(cy * 2**zoom - screen.height/2);
     zoom_p.textContent = "x" + 2**zoom;
@@ -80,6 +84,11 @@ document.querySelector("#zoom_plus").addEventListener("click", () => {
     setZoom(zoom + 1);
 });
 
+speed_range.addEventListener("input", event => {
+    simulation_speed = parseInt(event.currentTarget.value);
+    speed_label.textContent = simulation_speed + " ticks/s";
+});
+
 function processKeys() {
     // On applique les effets liés aux touches
     if (keys.get("x") === 1 && keys.get("Control") > 0) {
@@ -137,13 +146,18 @@ function simulate() {
     }
 }
 
-function tick() {
+function main() {
     processKeys();
+    refresh();
+    setTimeout(main, 40);
+}
+
+function tick() {
     if (simulating) {
         simulate();
     }
-    refresh();
-    setTimeout(tick, 40);
+    setTimeout(tick, Math.round(1000/simulation_speed))
 }
 
+main();
 tick();
