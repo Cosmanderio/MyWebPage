@@ -10,16 +10,23 @@ const NEIGHBORS = [-WIDTH-1, -WIDTH, -WIDTH+1, -1, 1, WIDTH-1, WIDTH, WIDTH+1];
 let scroll_x = 0;
 let scroll_y = 0;
 let simulating = false;
-let simulation_speed = 5;
 const speed_range = document.querySelector("#speed");
 const speed_label = document.querySelector("#speed_label");
-speed_label.textContent = speed_range.value + " ticks/s";
+let simulation_speed = speed_range.value ?? 5;
+speed_label.textContent = simulation_speed + " ticks/s";
+const start_pause_button = document.querySelector("#start_pause");
+const start_pause_img = start_pause_button.querySelector("img");
 const keys = new Map();
 
 positiveModulo = (number, divisor) => ((number % divisor) + divisor) % divisor;
 XY2Int = (x, y) => y * WIDTH + x + HALF_WIDTH;
 Int2X = value => positiveModulo(value, WIDTH) - HALF_WIDTH;
 Int2Y = value => Math.floor(value / WIDTH);
+
+document.querySelectorAll(".nokeypress").forEach(element => {
+    // On désactive la réaction de l'élément aux touches pressées
+    element.onkeydown = () => false;
+});
 
 function setZoom(value) {
     const cx = (scroll_x + screen.width/2) / 2**zoom;
@@ -28,6 +35,11 @@ function setZoom(value) {
     scroll_x = Math.round(cx * 2**zoom - screen.width/2);
     scroll_y = Math.round(cy * 2**zoom - screen.height/2);
     zoom_p.textContent = "x" + 2**zoom;
+}
+
+function setSimulating(value) {
+    simulating = value;
+    start_pause_img.src = "../images/" + (simulating ? "pause.png" : "start.png");
 }
 
 setZoom(4);
@@ -69,7 +81,9 @@ screen.addEventListener("wheel", event => {
 })
 
 document.addEventListener("keydown", event => {
-    keys.set(event.key, 1);
+    if ((keys.get(event.key) ?? 0) < 1) {
+        keys.set(event.key, 1);
+    }
 });
 
 document.addEventListener("keyup", event => {
@@ -84,6 +98,10 @@ document.querySelector("#zoom_plus").addEventListener("click", () => {
     setZoom(zoom + 1);
 });
 
+start_pause_button.addEventListener("click", event => {
+    setSimulating(!simulating);
+})
+
 speed_range.addEventListener("input", event => {
     simulation_speed = parseInt(event.currentTarget.value);
     speed_label.textContent = simulation_speed + " ticks/s";
@@ -97,7 +115,7 @@ function processKeys() {
         scroll_y = 0;
     }
     if (keys.get(" ") === 1 || keys.get("Enter") === 1) {
-        simulating = !simulating;
+        setSimulating(!simulating);
     }
     scroll_x += (keys.get("ArrowRight") > 0) * 10;
     scroll_x += (keys.get("ArrowLeft") > 0) * -10;
