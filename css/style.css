@@ -1,8 +1,8 @@
 :root {
-    --dark-blue: #161C34;
+    --dark-blue: #20294d;
     --blue: #0992C2;
     --light-blue: #0AC4E0;
-    --background-color: #202A4D;
+    --background-color: #2a3766;
 }
 
 body {
@@ -11,21 +11,65 @@ body {
     margin: 0;
 }
 
-h1, h2 {
+#page {
+    display: flex;
+    flex-direction: row;
+}
+
+nav {
+    position: sticky;
+    height: min-content;
+    top: 100px;
+    margin: 0 40px;
+}
+
+h1, h2, h3 {
     color: #E9EAED;
 }
 
 h1 {
+    text-align: center;
+    font-family: 'Times New Roman', Times, serif;
+    margin-top: 50px;
+    margin-bottom: 40px;
     font-size: 42px;
 }
 
 h2 {
-    font-size: 32px;
+    font-family: 'Times New Roman', Times, serif;
+    margin-bottom: 20px;
+    font-size: 34px;
 }
 
-p, label {
+h3 {
+    font-size: 26px;
+}
+
+p, label, img {
     color: #C7C9D2;
     font-size: 22px;
+}
+
+#content p {
+    max-width: 60%;
+    padding-left: 20px;
+    margin: 10px auto;
+    max-width: 65%;
+}
+
+#nav-main {
+    color: #C7C9D2;
+    font-size: 28px;
+    list-style-type: upper-roman;
+}
+
+#nav-sec {
+    color: #C7C9D2;
+    font-size: 22px;
+}
+
+a {
+    color: var(--blue);
 }
 
 header {
@@ -37,7 +81,7 @@ header {
     align-items: center;
     justify-content: center;
     margin: 0;
-    position: absolute;
+    position: sticky;
     width: 100%;
     top: 0;
     list-style: none;
@@ -73,22 +117,6 @@ header a {
 #content {
     align-content: center;
     text-align: center;
-}
-
-#content > p {
-    padding-left: 20px;
-}
-
-h1 {
-    text-align: center;
-    font-family: 'Times New Roman', Times, serif;
-    margin-top: 80px;
-    margin-bottom: 40px;
-}
-
-h2 {
-    font-family: 'Times New Roman', Times, serif;
-    margin-bottom: 20px;
 }
 
 #screen {
