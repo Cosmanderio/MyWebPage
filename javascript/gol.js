@@ -17,6 +17,7 @@ speed_label.textContent = simulation_speed + " ticks/s";
 const start_pause_button = document.querySelector("#start_pause");
 const start_pause_img = start_pause_button.querySelector("img");
 const keys = new Map();
+let brush = false;
 
 positiveModulo = (number, divisor) => ((number % divisor) + divisor) % divisor;
 XY2Int = (x, y) => y * WIDTH + x + HALF_WIDTH;
@@ -51,26 +52,32 @@ function refresh() {
     }
 }
 
-screen.onmousedown = () => {
+screen.onmousedown = event => {
+    brush = !livings_cells.has(clickEventToPosition(event));
     mouse_clicked = true;
+    clickOnCell(event);
 };
 
 screen.onmouseup = () => mouse_clicked = false;
 
-function addCell(event) {
+function clickEventToPosition(event) {
     let x = Math.floor((event.offsetX / screen.clientWidth * screen.width + scroll_x) / 2**zoom);
     let y = Math.floor((event.offsetY / screen.clientHeight * screen.height + scroll_y) / 2**zoom);
-    let position = XY2Int(x, y);
-    livings_cells.add(position);
+    return XY2Int(x, y);
 }
 
-screen.addEventListener("click", event => {
-    addCell(event);
-});
+function clickOnCell(event) {
+    let position = clickEventToPosition(event);
+    if (brush) {
+        livings_cells.add(position);
+    } else {
+        livings_cells.delete(position);
+    }
+}
 
 screen.addEventListener("mousemove", event => {
     if (!mouse_clicked) return;
-    addCell(event);
+    clickOnCell(event);
 });
 
 screen.addEventListener("wheel", event => {
