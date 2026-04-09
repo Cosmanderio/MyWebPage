@@ -4,7 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Conway's Game of Life</title>
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/main_style.css">
+    <link rel="stylesheet" href="css/style1.css">
 </head>
 <body>
     <header>
@@ -36,30 +37,32 @@
             <p>Le jeu de la vie a été inventé en ... par ...</p>
             <h2>Les structures</h2>
             <h3>Structures stables</h3>
-            <img src="images/stilllife.png" alt="Image de structures stables">
+            <img src="images/stilllife.png" alt="Image de structures stables" class="half_size">
             <h3>Oscillateurs</h3>
-            <img src="images/oscillator.gif" alt="GIF d'une structure oscillante">
+            <img src="images/oscillator.gif" alt="GIF d'une structure oscillante" class="half_size">
             <h3>Vaisseaux</h3>
-            <img src="images/spaceship.gif" alt="GIF d'un vaisseau">
+            <img src="images/spaceship.gif" alt="GIF d'un vaisseau" class="half_size">
             <p>Le plus petit vaisseau découvert à ce jour : le <em>planeur</em></p>
             <h3>Puffers</h3>
             <p>
                 Un <a href="https://fr.wikipedia.org/wiki/Puffeur">puffer</a> est un objet du jeu de la vie se déplaçant, 
                 mais, contrairement au vaisseau, le puffer laisse un plus ou moins grand nombre de débris.
             </p>
-            <img src="images/puffer.gif" alt="GIF d'un puffer">
+            <img src="images/puffer.gif" alt="GIF d'un puffer" class="half_size">
             <p>Le deuxième puffer découvert</p>
             <h3>Mathusalems</h3>
-            <a href="https://fr.wikipedia.org/wiki/Mathusalem_(automate_cellulaire)#Le_pentomino_R"><img src="images/methuselah1.png" alt="Image mathusalem gen 0"></a>
-            <a href="https://fr.wikipedia.org/wiki/Mathusalem_(automate_cellulaire)#Le_pentomino_R"><img src="images/methuselah2.png" alt="Image mathusalem gen 1103"></a>
+            <div class="half_size same_width">
+                <a href="https://fr.wikipedia.org/wiki/Mathusalem_(automate_cellulaire)#Le_pentomino_R"><img src="images/methuselah1.png" alt="Image mathusalem gen 0"></a>
+                <a href="https://fr.wikipedia.org/wiki/Mathusalem_(automate_cellulaire)#Le_pentomino_R"><img src="images/methuselah2.png" alt="Image mathusalem gen 1103"></a>
+            </div>
             <h3 id="canons">Canons</h3>
-            <img src="images/gospers_glider_gun.gif" alt="GIF d'un canon">
+            <img src="images/gospers_glider_gun.gif" alt="GIF d'un canon" class="half_size">
             <h3>Rakes</h3>
             <p>
                 Une <a href="https://fr.wikipedia.org/wiki/Puffeur#Rakes">rake</a> est un puffeur émettant 
                 exclusivement des vaisseaux. On peut donc considérer qu'une rake est un canon en mouvement.
             </p>
-            <img src="images/rake.gif" alt="GIF d'une rake">
+            <img src="images/rake.gif" alt="GIF d'une rake" class="half_size">
             <p>La rake spatiale (découverte en 1971) est la première rake trouvée. Elle émet des <em>planeurs</em>.</p>
             <h3>Breeders : Puffeur à canons</h3>
             <p>
@@ -67,7 +70,7 @@
                 Le premier puffeur de cette catégorie à avoir été découvert est appelé 
                 <a href="https://fr.wikipedia.org/wiki/Puffeur#Puffeurs_.C3.A0_grossissement_quadratique">breeder</a>
             </p>
-            <img src="images/breeder.gif" alt="GIF d'un breeder">
+            <img src="images/breeder.gif" alt="GIF d'un breeder" class="half_size">
             <p>Un puffeur à grossissement quadratique, émettant des <a href="#canons">canons</a>.</p>
         </div>
     </div>

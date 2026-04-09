@@ -1,0 +1,93 @@
+:root {
+    --dark-blue: #20294d;
+    --blue: #0992C2;
+    --light-blue: #0AC4E0;
+    --background-color: #2a3766;
+}
+
+#page {
+    display: flex;
+    flex-direction: row;
+}
+
+nav {
+    position: sticky;
+    height: min-content;
+    top: 100px;
+    margin: 0 40px;
+    width: 250px;
+}
+
+h1, h2, h3 {
+    color: #E9EAED;
+}
+
+h1 {
+    text-align: center;
+    font-family: 'Times New Roman', Times, serif;
+    margin-top: 50px;
+    margin-bottom: 40px;
+    font-size: 42px;
+}
+
+h2 {
+    font-family: 'Times New Roman', Times, serif;
+    margin-bottom: 20px;
+    font-size: 34px;
+}
+
+h3 {
+    font-size: 26px;
+}
+
+#content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+#content p {
+    max-width: 60%;
+    padding-left: 20px;
+    margin: 10px auto;
+    max-width: 65%;
+}
+
+#nav-main {
+    color: #C7C9D2;
+    font-size: 28px;
+    list-style-type: upper-roman;
+}
+
+#nav-sec {
+    color: #C7C9D2;
+    font-size: 22px;
+    width: max-content;
+}
+
+a {
+    color: var(--blue);
+}
+
+img {
+    border-radius: 12px;
+}
+
+.half_size {
+    width: 40%;
+}
+
+.same_width {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.same_width > * {
+    flex: 1;
+}
+
+.same_width img {
+    width: 90%;
+}
