@@ -1,7 +1,7 @@
 :root {
     --dark-blue: #20294d;
     --blue: #0992C2;
-    --light-blue: #0AC4E0;
+    --light-blue: #0bafc9;
     --background-color: #2a3766;
 }
 
@@ -11,7 +11,7 @@ body {
     margin: 0;
 }
 
-p, label, img {
+p, label, img, li {
     color: #C7C9D2;
     font-size: 22px;
 }

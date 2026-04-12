@@ -21,7 +21,7 @@
                 <li>
                     <a href="#structures">Structures</a>
                     <ul id="nav-sec">
-                        <li><a href="#stillife">Structures stables</a></li>
+                        <li><a href="#stilllife">Structures stables</a></li>
                         <li><a href="#oscillator">Oscillateurs</a></li>
                         <li><a href="#spaceship">Vaisseaux</a></li>
                         <li><a href="#puffer">Puffers</a></li>
@@ -34,12 +34,35 @@
             </ul>
         </nav>
         <div id="content">
-            <h1>Le jeu de la vie de Conway</h1>
+            <h1>Le Jeu de la vie de Conway</h1>
             <h2 id="intro">Introduction</h2>
-            <p>Le jeu de la vie a été inventé en ... par ...</p>
-            <h2 id="structures">Les structures</h2>
+            <p>Le Jeu de la vie (<em>Game of Life</em>) est un automate cellulaire imaginé par John Horton Conway en 1970. 
+                Il est composé d'une grille sans fin en 2 dimensions dont chaque case représente une cellule qui peut avoir 2 états :
+            </p>
+            <ul>
+                <li><strong>vivante</strong> : représentée en noir dans cette page.</li>
+                <li><strong>morte</strong> : représentée en blanc dans cette page.</li>
+            </ul>
+            <p><br>
+                C'est un jeu en apparence extrêmement simple puisqu'il n'est basé que sur 2 règles qui s'appliquent à chaque <strong>génération</strong>,
+                une génération correspondant à une simulation de la grille complète :</p>
+            <ul>
+                <li>une cellule morte ayant exactement 3 voisines vivantes devient vivante également (elle <em>nait</em>)</li>
+                <li>une cellule vivante ayant moins de 2 voisines vivantes ou plus de 3 meurt (de solitude ou de suffocation)</li>
+            </ul>
+            <p class="note">Note : chaque cellule possède huit voisines, qui sont les cellules adjacentes horizontalement, verticalement et diagonalement</p>
+            <p><br>
+                Malgré ces règles très simples, le Jeu de la vie est <strong><a href="https://fr.wikipedia.org/wiki/Turing-complet">Turing-complet</a></strong>. 
+                Cela signifie qu'il est possible de <strong>programmer</strong> directement dans le Jeu de la vie !
+            </p>
 
-            <section id="stillife">
+            <h2 id="structures">Les structures</h2>
+            <p>
+                Une structure est un ensemble de cellules vivantes. Il en existe de nombreuses <a href="https://playgameoflife.com/lexicon">recensées</a> 
+                dans le Jeu de la vie que l'on retrouve régulièrement dans la grille. Celles-ci sont classées dans plusieurs catégories selon leurs caractéristiques.
+            </p>
+
+            <section id="stilllife">
                 <h3>Structures stables</h3>
                 <p>
                     Les <a href="https://fr.wikipedia.org/wiki/Structure_stable_(automate_cellulaire)">structures stables</a> 
@@ -52,12 +75,22 @@
 
             <section id="oscillator">
                 <h3>Oscillateurs</h3>
+                <p>
+                    Les <a href="https://fr.wikipedia.org/wiki/Oscillateur_(automate_cellulaire)">oscillateurs</a> sont des structures 
+                    périodiques, c'est-à-dire qu'elles finissent toujours par revenir à leur forme et à leur position d'origine en un 
+                    nombre de générations fini que l'on appelle la <em>période</em> de l'oscillateur.
+                </p>
                 <img src="images/oscillator.gif" alt="GIF d'une structure oscillante" class="half_size">
                 <p class="caption">Le <em>blinker</em> n'est composé que de 3 cellules et se répète toutes les 2 générations</p>
             </section>
 
             <section id="spaceship">
                 <h3>Vaisseaux</h3>
+                <p>
+                    Le <a href="https://fr.wikipedia.org/wiki/Vaisseau_(automate_cellulaire)">vaisseau</a> est semblable à un <a href="#oscillator">oscillateur</a>
+                     puisqu'il reprend systématiquement sa forme au bout d'un moment mais la différence est qu'il se <strong>déplace</strong> entre chacune 
+                    de ses périodes.
+                </p>
                 <img src="images/spaceship.gif" alt="GIF d'un vaisseau" class="half_size">
                 <p class="caption">Le plus petit vaisseau découvert à ce jour : le <em>planeur</em></p>
             </section>
@@ -65,8 +98,9 @@
             <section id="puffer">
                 <h3>Puffers</h3>
                 <p>
-                    Un <a href="https://fr.wikipedia.org/wiki/Puffeur">puffer</a> est un objet du jeu de la vie se déplaçant,
-                    mais, contrairement au vaisseau, le puffer laisse un plus ou moins grand nombre de débris.
+                    Un <a href="https://fr.wikipedia.org/wiki/Puffeur">puffer</a> est un objet du Jeu de la vie se déplaçant,
+                    mais, contrairement au <a href="#spaceship">vaisseau</a>, le puffer laisse un plus ou moins grand nombre de 
+                    débris derrière lui.
                 </p>
                 <img src="images/puffer.gif" alt="GIF d'un puffer" class="half_size">
                 <p class="caption">Le deuxième puffer découvert</p>
@@ -76,7 +110,7 @@
                 <h3>Mathusalems</h3>
                 <p>
                     Un <a href="https://fr.wikipedia.org/wiki/Mathusalem_(automate_cellulaire)">mathusalem</a> est
-                    une petite structure qui « explose » en de nombreuses structures stables.
+                    une petite structure qui « explose » en de nombreux <a href="#oscillator">oscillateurs</a> et <a href="#stilllife">structures stables</a>.
                     Les plus intéressants sont ceux qui prennent des centaines voir des milliers de générations à se stabiliser
                     à partir d'une structure de quelques cellules.
                 </p>
@@ -92,7 +126,16 @@
             </section>
 
             <section id="gun">
-                <h3 id="canons">Canons</h3>
+                <h3>Canons</h3>
+                <p>
+                    Un <a href="https://fr.wikipedia.org/wiki/Canon_(automate_cellulaire)">canon</a> est un <a href="#oscillator">oscillateur</a>
+                     ayant la particularité d'émettre régulièrement des <a href="#spaceship">vaisseaux</a>. Il possède donc 2 périodes :
+                </p>
+                <ul>
+                    <li>La période à laquelle les vaisseaux sont émis</li>
+                    <li>La période du canon lui-même</li>
+                </ul>
+                <p class="note">À noter que la période du canon est forcément un multiple de la période d'émission des vaisseaux</p>
                 <img src="images/gospers_glider_gun.gif" alt="GIF d'un canon" class="half_size">
                 <p class="caption">Le canon de Gosper émet des <em>planeurs</em></p>
             </section>
@@ -100,8 +143,8 @@
             <section id="rake">
                 <h3>Rakes</h3>
                 <p>
-                    Une <a href="https://fr.wikipedia.org/wiki/Puffeur#Rakes">rake</a> est un puffeur émettant
-                    exclusivement des vaisseaux. On peut donc considérer qu'une rake est un canon en mouvement.
+                    Une <a href="https://fr.wikipedia.org/wiki/Puffeur#Rakes">rake</a> est un <a href="#puffer">puffeur</a> émettant
+                    exclusivement des <a href="#spaceship">vaisseaux</a>. On peut donc considérer qu'une rake est un <a href="#gun">canon</a> en mouvement.
                 </p>
                 <img src="images/rake.gif" alt="GIF d'une rake" class="half_size">
                 <p class="caption">La rake spatiale (découverte en 1971) est la première rake trouvée. Elle émet des <em>planeurs</em></p>
@@ -110,12 +153,12 @@
             <section id="breeder">
                 <h3>Breeders : Puffeur à canons</h3>
                 <p>
-                    Certains puffeurs ne grossissent pas uniformément : plus le temps passe, plus ils grossissent vite.
-                    Le premier puffeur de cette catégorie à avoir été découvert est appelé
-                    <a href="https://fr.wikipedia.org/wiki/Puffeur#Puffeurs_.C3.A0_grossissement_quadratique">breeder</a>
+                    Certains <a href="#puffer">puffeurs</a> ne grossissent pas uniformément : plus le temps passe, plus ils grossissent vite.
+                    Le premier de cette catégorie à avoir été découvert a été appelé
+                    <a href="https://fr.wikipedia.org/wiki/Puffeur#Puffeurs_.C3.A0_grossissement_quadratique">breeder</a>.
                 </p>
                 <img src="images/breeder.gif" alt="GIF d'un breeder" class="half_size">
-                <p class="caption">Un puffeur à grossissement quadratique, émettant des <a href="#canons">canons</a></p>
+                <p class="caption">Un <a href="#puffer">puffeur</a> à grossissement quadratique, émettant des <a href="#gun">canons</a></p>
             </section>
         </div>
     </div>

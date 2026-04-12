@@ -34,3 +34,9 @@ function onScroll() {
 
 document.addEventListener("scroll", onScroll);
 onScroll();
+
+document.querySelectorAll("#content a").forEach(link => {
+    if (link.getAttribute("href").startsWith("#")) {
+        link.style.color = "inherit";
+    }
+})
