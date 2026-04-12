@@ -5,7 +5,8 @@
     margin-left: auto;
     margin-right: auto;
     margin-bottom: 30px;
-    width: 60%;
+    width: 80%;
+    max-width: 1000px;
     background-color: white;
 }
 
@@ -59,9 +60,9 @@
 #start_pause {
     width: 42px;
     height: 42px;
-    padding: 0;
-    background-color: transparent;
+    background-image: url("../images/start.png");
     border: 0;
+    background-color: transparent;
     transition: transform 0.4s ease-out;
 }
 
@@ -69,8 +70,27 @@
     transform: rotate(360deg);
 }
 
-#start_pause img {
-    height: inherit;
-    margin: 0;
-    padding: 0;
+#grab_button {
+    width: 42px;
+    height: 42px;
+    background-image: url("../images/grab.png");
+    border: 0;
+    border-radius: 8px;
+    background-size: 80%;
+    background-color: transparent;
+    transition: background-color 0.1s ease-in;
+}
+
+#grab_button:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+}
+
+#grab_button.active {
+    background-color: rgba(255, 255, 255, 0.4);
+}
+
+.imgbutton {
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
 }

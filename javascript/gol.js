@@ -15,7 +15,8 @@ const speed_label = document.querySelector("#speed_label");
 let simulation_speed = speed_range.value ?? 5;
 speed_label.textContent = simulation_speed + " ticks/s";
 const start_pause_button = document.querySelector("#start_pause");
-const start_pause_img = start_pause_button.querySelector("img");
+const grab_button = document.querySelector("#grab_button");
+let grab = false;
 const keys = new Map();
 let brush = false;
 
@@ -40,7 +41,17 @@ function setZoom(value) {
 
 function setSimulating(value) {
     simulating = value;
-    start_pause_img.src = "../images/" + (simulating ? "pause.png" : "start.png");
+    if (simulating) setGrab(true);
+    start_pause_button.style.backgroundImage = "url(../images/" + (simulating ? "pause.png" : "start.png") + ")";
+}
+
+function setGrab(value) {
+    grab = value;
+    if (grab) {
+        grab_button.classList.add("active");
+    } else {
+        grab_button.classList.remove("active");
+    }
 }
 
 setZoom(4);
@@ -53,8 +64,9 @@ function refresh() {
 }
 
 screen.onmousedown = event => {
-    brush = !livings_cells.has(clickEventToPosition(event));
     mouse_clicked = true;
+    if (grab) return;
+    brush = !livings_cells.has(clickEventToPosition(event));
     clickOnCell(event);
 };
 
@@ -77,7 +89,12 @@ function clickOnCell(event) {
 
 screen.addEventListener("mousemove", event => {
     if (!mouse_clicked) return;
-    clickOnCell(event);
+    if (grab) {
+        scroll_x -= Math.round(event.movementX / screen.clientWidth * screen.width);
+        scroll_y -= Math.round(event.movementY / screen.clientHeight * screen.height);
+    } else {
+        clickOnCell(event);
+    }
 });
 
 screen.addEventListener("wheel", event => {
@@ -105,7 +122,11 @@ document.querySelector("#zoom_plus").addEventListener("click", () => {
     setZoom(zoom + 1);
 });
 
-start_pause_button.addEventListener("click", event => {
+grab_button.addEventListener("click", () => {
+    setGrab(!grab);
+})
+
+start_pause_button.addEventListener("click", () => {
     setSimulating(!simulating);
 })
 
@@ -123,6 +144,9 @@ function processKeys() {
     }
     if (keys.get(" ") === 1 || keys.get("Enter") === 1) {
         setSimulating(!simulating);
+    }
+    if (keys.get("g") === 1) {
+        setGrab(!grab);
     }
     scroll_x += (keys.get("ArrowRight") > 0) * 10;
     scroll_x += (keys.get("ArrowLeft") > 0) * -10;
