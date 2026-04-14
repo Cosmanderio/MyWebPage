@@ -81,6 +81,20 @@
     transition: background-color 0.1s ease-in;
 }
 
+#file_button {
+    margin: 0 40px;
+    height: 42px;
+    width: 156px;
+    background-image: url("../images/file.png");
+    background-color: transparent;
+    border: 0;
+    transition: filter 0.1s ease;
+}
+
+#file_button:hover {
+    filter: brightness(1.1);
+}
+
 #grab_button:hover {
     background-color: rgba(255, 255, 255, 0.2);
 }

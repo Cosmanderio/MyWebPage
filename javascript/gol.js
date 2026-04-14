@@ -16,6 +16,8 @@ let simulation_speed = speed_range.value ?? 5;
 speed_label.textContent = simulation_speed + " ticks/s";
 const start_pause_button = document.querySelector("#start_pause");
 const grab_button = document.querySelector("#grab_button");
+const file_button = document.querySelector("#file_button");
+const file_input = document.querySelector("#file_input");
 let grab = false;
 const keys = new Map();
 let brush = false;
@@ -31,11 +33,11 @@ document.querySelectorAll(".nokeypress").forEach(element => {
 });
 
 function setZoom(value) {
-    const cx = (scroll_x + screen.width/2) / 2**zoom;
-    const cy = (scroll_y + screen.height/2) / 2**zoom;
+    const cx = (scroll_x) / 2**zoom;
+    const cy = (scroll_y) / 2**zoom;
     zoom = Math.min(Math.max(value, 0), 8);
-    scroll_x = Math.round(cx * 2**zoom - screen.width/2);
-    scroll_y = Math.round(cy * 2**zoom - screen.height/2);
+    scroll_x = Math.round(cx * 2**zoom);
+    scroll_y = Math.round(cy * 2**zoom);
     zoom_p.textContent = "x" + 2**zoom;
 }
 
@@ -58,8 +60,10 @@ setZoom(4);
 
 function refresh() {
     ctx.clearRect(0, 0, screen.width, screen.height);
+    const hw = Math.round(screen.width/2);
+    const hh = Math.round(screen.height/2);
     for (let cell of livings_cells) {
-        ctx.fillRect(Int2X(cell)*2**zoom-scroll_x, Int2Y(cell)*2**zoom-scroll_y, 2**zoom, 2**zoom);
+        ctx.fillRect(Int2X(cell)*2**zoom-scroll_x+hw, Int2Y(cell)*2**zoom-scroll_y+hh, 2**zoom, 2**zoom);
     }
 }
 
@@ -73,8 +77,8 @@ screen.onmousedown = event => {
 screen.onmouseup = () => mouse_clicked = false;
 
 function clickEventToPosition(event) {
-    let x = Math.floor((event.offsetX / screen.clientWidth * screen.width + scroll_x) / 2**zoom);
-    let y = Math.floor((event.offsetY / screen.clientHeight * screen.height + scroll_y) / 2**zoom);
+    let x = Math.floor((event.offsetX / screen.clientWidth * screen.width + scroll_x - screen.width/2) / 2**zoom);
+    let y = Math.floor((event.offsetY / screen.clientHeight * screen.height + scroll_y - screen.height/2) / 2**zoom);
     return XY2Int(x, y);
 }
 
@@ -102,7 +106,7 @@ screen.addEventListener("wheel", event => {
         event.preventDefault();  // On annule le scroll
         setZoom(zoom + (event.deltaY > 0 ? -1 : 1));
     }
-})
+});
 
 document.addEventListener("keydown", event => {
     if ((keys.get(event.key) ?? 0) < 1) {
@@ -124,16 +128,72 @@ document.querySelector("#zoom_plus").addEventListener("click", () => {
 
 grab_button.addEventListener("click", () => {
     setGrab(!grab);
-})
+});
 
 start_pause_button.addEventListener("click", () => {
     setSimulating(!simulating);
+});
+
+file_button.addEventListener("click", () => {
+    file_input.click();
+    setSimulating(false);
+});
+
+file_input.addEventListener("input", event => {
+    const files = event.target.files;
+    console.log("input")
+    if (files) {
+        loadRLEFile(files[0]);
+    }
 })
 
 speed_range.addEventListener("input", event => {
     simulation_speed = parseInt(event.currentTarget.value);
     speed_label.textContent = simulation_speed + " ticks/s";
 });
+
+function loadRLEFile(file) {
+    const reader = new FileReader();
+    reader.onload = load => {
+        loadRLE(load.target.result, Math.round(scroll_x/2**zoom), Math.round(scroll_y/2**zoom));
+    };
+    reader.readAsText(file);
+}
+
+function loadRLE(rle, default_x = 0, default_y = 0) {
+    let bx = default_x;
+    let by = default_y;
+    let x = 0, y = 0;
+    for (let line of rle.split("\n")) {
+        if (line.startsWith("#")) continue;
+        let match = line.match(/x *= *(\d+), *y *= *(\d+)/);
+        if (match) {
+            bx = Math.round(match[1]/-2) + default_x;
+            by = Math.round(match[2]/-2) + default_y;
+        } else {
+            let lenght;
+            for (let letter of line) {
+                if (letter === "o") {
+                    for (let i = 0; i < parseInt(lenght ?? 1); i++) {
+                        livings_cells.add(XY2Int(bx+x++, by+y));
+                    }
+                    lenght = undefined;
+                } else if (letter === "b") {
+                    x += parseInt(lenght ?? 1);
+                    lenght = undefined;
+                } else if (letter === "$") {
+                    x = 0;
+                    y += parseInt(lenght ?? 1);
+                    lenght = undefined;
+                } else if (letter === "!") {
+                    return;
+                } else if ("0123456789".includes(letter)) {
+                    lenght = (lenght ?? "") + letter;
+                }
+            }
+        }
+    }
+}
 
 function processKeys() {
     // On applique les effets liés aux touches
