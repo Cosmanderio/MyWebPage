@@ -141,7 +141,6 @@ file_button.addEventListener("click", () => {
 
 file_input.addEventListener("input", event => {
     const files = event.target.files;
-    console.log("input")
     if (files) {
         loadRLEFile(files[0]);
     }
@@ -155,7 +154,9 @@ speed_range.addEventListener("input", event => {
 function loadRLEFile(file) {
     const reader = new FileReader();
     reader.onload = load => {
+        console.log("start loading")
         loadRLE(load.target.result, Math.round(scroll_x/2**zoom), Math.round(scroll_y/2**zoom));
+        console.log("end loading")
     };
     reader.readAsText(file);
 }
