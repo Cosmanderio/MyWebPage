@@ -29,6 +29,7 @@ header {
     width: 100%;
     top: 0;
     list-style: none;
+    z-index: 1;
 }
 
 header ul {

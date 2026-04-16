@@ -4,19 +4,24 @@
 }
 
 nav {
-    position: fixed;
+    position: sticky;
     top: 50%;
     transform: translateY(-50%);
     margin: 0 40px;
-    width: 250px;
     background-color: #303f76;
     border-radius: 30px;
     box-shadow: 2px 2px 5px #303f76;
+    padding: 16px;
+    height: min-content;
 }
 
 nav a {
     color: inherit;
     text-decoration: none;
+}
+
+nav, nav ul {
+    width: min-content;
 }
 
 h1, h2, h3 {
@@ -51,7 +56,6 @@ h3 {
 
 #content {
     padding-bottom: 150px;
-    margin-left: 250px;
     text-align: center;
     line-height: 34px;
 }
@@ -74,22 +78,22 @@ section {
 
 #nav-main {
     color: #C7C9D2;
-    font-size: 28px;
+    font-size: 24px;
     list-style-type: upper-roman;
 }
 
 #nav-sec {
     color: #C7C9D2;
-    font-size: 22px;
+    font-size: 20px;
     width: max-content;
 }
 
 #nav-main li {
-    margin-bottom: 16px;
+    margin-bottom: 12px;
 }
 
 #nav-sec li {
-    margin-top: 8px;
+    margin-top: 6px;
 }
 
 .onscreen {
@@ -119,8 +123,7 @@ img {
 }
 
 .same_width > * {
-    flex: 1;
-    width: 45%;
+    width: 47%;
 }
 
 .caption, .note {
@@ -151,7 +154,7 @@ footer {
     display: flex;
     flex-direction: row;
     justify-content: center;
-    align-items: center;
+    align-items: top;
 }
 
 footer h4 {
